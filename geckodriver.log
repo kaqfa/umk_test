@@ -1,0 +1,10 @@
+1543231696068	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.TYs5UybYOOvi"
+
+(firefox:27527): Gtk-WARNING **: Theme parsing error: <data>:1:34: Expected ')' in color definition
+
+(firefox:27527): Gtk-WARNING **: Theme parsing error: <data>:1:77: Expected ')' in color definition
+1543231697578	Marionette	INFO	Listening on port 35265
+1543231697678	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://activity-stream/lib/TopSitesFeed.jsm, line 93: TypeError: setting getter-only property "_currentSearchHostname"
+[Parent 27527, Gecko_IOThread] WARNING: pipe error (76): Connection reset by peer: file /build/firefox-v2X3gM/firefox-63.0+linuxmint2+sylvia/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 356
+1543231714397	Marionette	INFO	Stopped listening on port 35265

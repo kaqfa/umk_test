@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Testing Django Keuangan</title>
+</head>
+<body>
+    <h1>Aplikasi Keuangan</h1>
+
+    {% if transactions %}
+    <h2>Tampilkan semua list keuangan</h2>
+    <ul>
+        {% for trans in transactions %}
+        <li><a href=""> {{ trans.judul }} [{{ trans.jenis }}] : {{ trans.jumlah }} </a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <h3>Belum login, tidak ada transaksi yang bisa ditampilkan.</h3>
+    {% endif %}
+</body>
+</html>
