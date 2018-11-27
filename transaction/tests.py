@@ -1,3 +1,4 @@
+import time
 from django.test import TestCase
 from .models import Transaction, TransactionRepo
 from django.contrib.auth.models import User
@@ -5,19 +6,66 @@ from django.test import Client, LiveServerTestCase
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
 
 class AdminTest(LiveServerTestCase):
 
+    fixtures = ['users.json']
+
     def setUp(self):
-        self.browser = webdriver.Firefox()
+        self.browser = webdriver.Chrome()
+        self.url = 'http://localhost:8000'
+
+        for user in User.objects.all():
+            user.set_password(user.password)
+            user.save()
 
     # def tearDown(self):
     #     self.browser.quit()
 
     def test_admin_site(self):
+        short_wait = 1
+        long_wait = 5
+
         self.browser.get(self.live_server_url+'/admin/')
         body = self.browser.find_element_by_tag_name('body')
+        time.sleep(short_wait)
         self.assertIn('Django administration', body.text)
+
+        username_field = self.browser.find_element_by_name('username')
+        password_field = self.browser.find_element_by_name('password')
+        username_field.send_keys('admin')
+        time.sleep(short_wait)
+        password_field.send_keys('a')
+        time.sleep(short_wait)
+        password_field.send_keys(Keys.RETURN)
+        body = self.browser.find_element_by_tag_name('body')
+        time.sleep(long_wait)
+        self.assertIn('Site administration', body.text)
+
+        trans_links = self.browser.find_elements_by_link_text('Transactions')
+        trans_links[0].click()
+        body = self.browser.find_element_by_tag_name('body')
+        self.assertIn('Select transaction to change', body.text)
+
+        time.sleep(long_wait)
+        add_trans_link = self.browser.find_element_by_link_text('Add transaction')
+        add_trans_link.click()
+        body = self.browser.find_element_by_tag_name('body')
+        self.assertIn('Add transaction', body.text)
+
+        Select(self.browser.find_element_by_name('user')).select_by_visible_text("admin")
+        self.browser.find_element_by_name('judul').send_keys("Transaksi aja")
+        self.browser.find_element_by_name('jumlah').send_keys("200000")
+        self.browser.find_element_by_name('ket').send_keys("Tanpa keterangan")
+        Select(self.browser.find_element_by_name('jenis')).select_by_visible_text("Pengeluaran")
+        Select(self.browser.find_element_by_name('status')).select_by_visible_text("Valid")
+        time.sleep(long_wait)
+        self.browser.find_element_by_css_selector("input[value='Save']").click()
+
+        time.sleep(long_wait)
+        body = self.browser.find_element_by_tag_name('body')
+        self.assertIn('Transaksi aja', body.text)
 
 
 class TransactionModelTest(TestCase):

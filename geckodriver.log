@@ -8,3 +8,5 @@
 JavaScript error: resource://activity-stream/lib/TopSitesFeed.jsm, line 93: TypeError: setting getter-only property "_currentSearchHostname"
 [Parent 27527, Gecko_IOThread] WARNING: pipe error (76): Connection reset by peer: file /build/firefox-v2X3gM/firefox-63.0+linuxmint2+sylvia/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 356
 1543231714397	Marionette	INFO	Stopped listening on port 35265
+1543261189191	geckodriver	INFO	geckodriver 0.21.0
+1543261189207	geckodriver	INFO	Listening on 127.0.0.1:50768

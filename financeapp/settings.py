@@ -25,7 +25,7 @@ SECRET_KEY = 'glj-dh7r+!a%@j8^n)l)q1_pd=8a5prl_!3ga(5*kkr9gch@3k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['testserver']
+ALLOWED_HOSTS = ['testserver', 'localhost']
 
 
 # Application definition
